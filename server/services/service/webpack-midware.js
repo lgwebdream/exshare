@@ -49,6 +49,7 @@ function koaHotMidware(hot, options) {
     return async(ctx, next) => {
 
         let stream = new PassThrough();
+        // TODO: 以下方法不执行， webpack-hot-middleware 断点不进入。
         await hot(ctx.req, {
             write: stream.write.bind(stream),
             writeHead: (status, headers) => {
@@ -87,8 +88,6 @@ export default function devHotMidware(compiler, options) {
     const dev = expressDevMidware(compiler, options.dev);
     const hot = expressHotMidware(compiler, options.hot);
 
-    console.log('DEV:::', dev)
-    console.log('HOT:::', hot)
     //合并middleware
     const middleware = compose([
         koaDevMidware(dev, compiler),
