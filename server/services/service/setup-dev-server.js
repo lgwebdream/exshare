@@ -30,7 +30,7 @@ module.exports = function setupDevServer(app, onupdate) {
             path: '/__webpack_hmr',
             heartbeat: 5 * 1000
         };
-    console.log(typeof compiler, '<<<<<<<<<')
+    
     let Middleware = devHotMidware(compiler, {
         dev: devOption,
         hot: hotOption
